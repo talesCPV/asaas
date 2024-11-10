@@ -24,11 +24,11 @@ echo $body['event'];
     });
 
     function createPayment($payment) {
-        // Implementação do createPayment
+        var_dump($payment);
     }
 
     function receivePayment($payment) {
-        // Implementação do receivePayment
+        var_dump($payment);
     }
 
 ?>
