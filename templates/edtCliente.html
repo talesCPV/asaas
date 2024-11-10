@@ -1,0 +1,123 @@
+
+<template>
+
+    <style>
+        .col{
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+    <div class="col">
+        <div class="inline">
+            <label for="name">Nome</label>
+            <input type="text" id="name" >
+        </div>
+        <div class="inline">
+            <label for="cpfCnpj">CPF</label>
+            <input type="text" id="cpfCnpj" >
+        </div>
+        <div class="inline">
+            <label for="email">Email</label>
+            <input type="text" id="email" >
+        </div>
+        <div class="inline">
+            <label for="phone">Telefone</label>
+            <input type="text" id="phone" >
+        </div>
+        <div class="inline">
+            <label for="mobilePhone">Celular</label>
+            <input type="text" id="mobilePhone" >
+        </div>
+        <div class="inline">
+            <label for="address">Endereço</label>
+            <input type="text" id="address" >
+        </div>                
+        <div class="inline">
+            <label for="addressNumber">Num</label>
+            <input type="text" id="addressNumber" >
+        </div>
+        <div class="inline">
+            <label for="complement">Complemento</label>
+            <input type="text" id="complement" >
+        </div>
+        <div class="inline">
+            <label for="province">Bairro</label>
+            <input type="text" id="province" >
+        </div>
+        <div class="inline">
+            <label for="postalCode">Cep</label>
+            <input type="text" id="postalCode" >
+        </div>
+        <div class="inline">
+            <label for="externalReference">Ref. Externa</label>
+            <input type="text" id="externalReference" >
+        </div>
+        <div class="inline">
+            <label for="notificationDisabled">Notificação</label>
+            <input type="text" id="notificationDisabled" >
+        </div>
+        <div class="inline">
+            <label for="additionalEmails">Adicional Email</label>
+            <input type="text" id="additionalEmails" >
+        </div>       
+        <div class="inline">
+            <label for="municipalInscription">Insc. Municipal</label>
+            <input type="text" id="municipalInscription" >
+        </div>       
+        <div class="inline">
+            <label for="stateInscription">Estado</label>
+            <input type="text" id="stateInscription" >
+        </div>       
+        <div class="inline">
+            <label for="observations">Obs</label>
+            <input type="text" id="observations" >
+        </div>       
+        <div class="inline">
+            <label for="groupName">Nome Grupo</label>
+            <input type="text" id="groupName" >
+        </div>       
+        <div class="inline">
+            <label for="company">Companhia</label>
+            <input type="text" id="company" >
+        </div>       
+        <div class="inline">
+            <label for="foreignCustomer">Estrangeiro</label>
+            <input type="text" id="foreignCustomer" >
+        </div>      
+        <button id="btnCadCli">Cadastrar</button>
+    </div>
+
+</template>
+<script>
+
+    function loadCli(){
+        console.log(cust)
+        const edits = document.querySelector('.col').querySelectorAll('input')
+        const cliente = new Object
+        for(let i=0; i<edits.length; i++){
+            if(cust.hasOwnProperty(edits[i].id)){
+                edits[i].value = cust[edits[i].id]
+            }
+        }
+    }
+
+    document.querySelector('#btnCadCli').addEventListener('click',()=>{
+
+        const edits = document.querySelector('.col').querySelectorAll('input')
+        const cliente = new Object
+        for(let i=0; i<edits.length; i++){
+            if(edits[i].value.trim() != ''){
+                cliente[edits[i].id] = edits[i].value
+            }
+        }
+
+        console.log(cliente)
+        edtCli(cust,cliente).then(()=>{
+            closePopup()
+        })
+    })
+
+    loadCli()
+
+</script>

@@ -1,0 +1,62 @@
+
+<template>
+
+    <style>
+        .tbl-btn{
+            background-color: blue;
+            color: aliceblue;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tbl-btn:hover{
+            background-color: aliceblue;
+            color: blue;
+        }
+    </style>
+
+    <div class="clientes"></div>
+
+</template>
+<script>
+
+    buscaCli().then((response)=>{
+        const tbl = document.createElement('table')
+        tbl.innerHTML = '<tr><th>Nome</th><th>Cidade</th><th>Rua</th><th>Num</th><th>CPF</th></tr>'
+        response.text().then((txt)=>{
+            const json = JSON.parse(txt)
+            for(let i=0; i<json.data.length; i++){
+                const row = document.createElement('tr')
+                row.innerHTML = `<td>${json.data[i].name}</td><td>${json.data[i].cityName}</td><td>${json.data[i].address}</td><td>${json.data[i].addressNumber}</td><td>${json.data[i].cpfCnpj}</td>`
+                tbl.appendChild(row)
+
+                const edt = document.createElement('td')
+                edt.innerHTML = 'EDIT'
+                edt.className = 'tbl-btn'
+                edt.addEventListener('click',()=>{
+                    cust = json.data[i]
+                    openHTML('edtCliente')
+                })
+                row.appendChild(edt)
+
+                const del = document.createElement('td')
+                del.innerHTML = 'DELETE'
+                del.className = 'tbl-btn'
+                del.addEventListener('click',()=>{
+                    delCli(json.data[i]).then(()=>{
+                        closePopup()
+                    })
+                })
+                row.appendChild(del)
+
+            }
+            document.querySelector('.clientes').appendChild(tbl)
+        })
+
+    })
+
+
+
+
+</script>
