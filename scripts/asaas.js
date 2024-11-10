@@ -1,4 +1,4 @@
-var cust = {}
+/* CLIENTES */
 
 function buscaCli(){
     const myRequest = new Request("asaas/buscaCliente.php",{
@@ -45,4 +45,37 @@ function delCli(cust){
         
         return fetch(myRequest)
     }
+}
+
+/* CONTA CORRENTE */
+
+function extrato(){
+    const myRequest = new Request("asaas/extrato.php",{
+        method : "POST"
+    }) 
+
+    return fetch(myRequest)
+
+}
+
+/* COBRANÇAS */
+
+function buscaCob(){
+    const myRequest = new Request("asaas/buscaCobranca.php",{
+        method : "POST"
+    }) 
+
+    return fetch(myRequest)
+}
+
+function newCob(body){
+    const data = new URLSearchParams()
+        data.append("body", JSON.stringify(body))
+
+    const myRequest = new Request("asaas/novaCobranca.php",{
+        method : "POST",
+        body : data
+    })    
+    
+    return fetch(myRequest)
 }

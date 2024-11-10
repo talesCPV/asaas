@@ -10,6 +10,8 @@
     
 
     </style>
+
+    <h2>Novo Cliente</h2>
     <div class="col">
         <div class="inline">
             <label for="name">Nome</label>
@@ -102,8 +104,6 @@
                 cliente[edits[i].id] = edits[i].value
             }
         }
-
-        console.log(cliente)
         newCli(cliente).then(()=>{
             closePopup()
         })

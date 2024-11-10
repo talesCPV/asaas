@@ -1,0 +1,48 @@
+
+<template>
+
+    <style>
+        .tbl-btn{
+            background-color: blue;
+            color: aliceblue;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tbl-btn:hover{
+            background-color: aliceblue;
+            color: blue;
+        }
+    </style>
+
+        <h2>Cobranças</h2>
+
+    <div class="clientes"></div>
+
+</template>
+<script>
+
+    buscaCob().then((response)=>{
+        const tbl = document.createElement('table')
+        tbl.innerHTML = '<tr><th>Data</th><th>Vencimento</th><th>Cliente</th><th>Descrição</th><th>Status</th><th>Valor</th></tr>'
+        response.text().then((txt)=>{
+            const json = JSON.parse(txt)
+console.log(json)            
+            for(let i=0; i<json.data.length; i++){
+                const row = document.createElement('tr')
+                row.innerHTML = `<td>${json.data[i].dateCreated}</td><td>${json.data[i].dueDate}</td><td>${json.data[i].customer}</td><td>${json.data[i].description}</td><td>${json.data[i].status}</td><td>${json.data[i].value}</td>`
+                tbl.appendChild(row)
+
+
+
+            }
+            document.querySelector('.clientes').appendChild(tbl)
+        })
+
+    })
+
+
+
+
+</script>

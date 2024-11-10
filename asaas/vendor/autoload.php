@@ -20,6 +20,8 @@ if (PHP_VERSION_ID < 50600) {
     );
 }
 
+define("access_token", '$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwOTQzMDM6OiRhYWNoXzQzMTE0ZTc1LTM0NmQtNGM1YS05OGE4LWU0MTVjNTExMDIxMQ==');
+
 require_once __DIR__ . '/composer/autoload_real.php';
 
 return ComposerAutoloaderInit626416f99f0fb3e218d4b38c2cdba2d9::getLoader();

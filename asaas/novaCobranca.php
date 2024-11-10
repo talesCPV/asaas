@@ -4,7 +4,7 @@
     if(isset($_POST['body'])){
      
       $client = new \GuzzleHttp\Client();
-      $response = $client->request('POST', 'https://sandbox.asaas.com/api/v3/customers', [
+      $response = $client->request('POST', 'https://sandbox.asaas.com/api/v3/payments', [
         'body' => $_POST['body'],
         'headers' => [
           'accept' => 'application/json',

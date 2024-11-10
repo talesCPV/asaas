@@ -1,0 +1,91 @@
+
+<template>
+
+    <style>
+        .col{
+            display: flex;
+            flex-direction: column;
+        }
+
+    
+
+    </style>
+
+    <h2>Nova Cobrança</h2>
+    <div class="col">
+        <div class="inline">
+            <label for="customer">Cliente</label>
+            <select class="field" id="customer"></select>
+        </div>
+        <div class="inline">
+            <label for="billingType">Modo de Pgto</label>
+            <select class="field" id="billingType">
+                <option value="UNDEFINED">A Definir</option>
+                <option value="BOLETO">Boleto</option>
+                <option value="CREDIT_CARD">Cartão de Crédito</option>
+                <option value="PIX" selected>Pix</option>
+            </select>
+        </div>
+        <div class="inline">
+            <label for="value">Valor</label>
+            <input class="field" type="text" id="value" >
+        </div>
+        <div class="inline">
+            <label for="dueDate">Vencimento</label>
+            <input class="field" type="date" id="dueDate" >
+        </div>
+        <div class="inline">
+            <label for="description">Descrição</label>
+            <input class="field" type="text" id="description" >
+        </div>
+        <div class="inline">
+            <label for="daysAfterDueDateToRegistrationCancellation">Dias p/ Cancelamento</label>
+            <input class="field" type="text" id="daysAfterDueDateToRegistrationCancellation" >
+        </div>                
+        <div class="inline">
+            <label for="externalReference">Ref. Externa</label>
+            <input class="field" type="text" id="externalReference" >
+        </div>
+    
+        <button id="btnCadCob">Cadastrar</button>
+    </div>
+
+</template>
+<script>
+
+    function cmbCli(){
+        buscaCli().then((response)=>{
+            response.text().then((txt)=>{
+                const json = JSON.parse(txt)
+                const cmb = document.querySelector('#customer')
+                cmb.innerHTML = ''
+                for(let i=0; i<json.data.length; i++){
+                    const opt = document.createElement('option')
+                    opt.innerHTML = json.data[i].name
+                    opt.value = json.data[i].id
+                    cmb.appendChild(opt)
+                }
+            })
+        })
+    }
+
+    document.querySelector('#btnCadCob').addEventListener('click',()=>{
+        const edits = document.querySelectorAll('.field')
+        const cobranca = new Object
+        for(let i=0; i<edits.length; i++){
+            if(edits[i].value.trim() != ''){
+                cobranca[edits[i].id] = edits[i].value
+            }
+        }
+
+        console.log(cobranca)
+        newCob(cobranca).then(()=>{
+            closePopup()
+        })
+
+    })
+
+
+    cmbCli()
+
+</script>

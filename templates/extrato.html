@@ -1,0 +1,33 @@
+<template>
+    <style>
+
+    </style>
+
+    <h2>Extrato</h2>
+    <div class="extrato"></div>
+
+
+</template>
+<script>
+
+    function getExtrato(){
+        extrato().then((response)=>{
+            const tbl = document.createElement('table')
+        tbl.innerHTML = '<tr><th>Data</th><th>Transação</th><th>Valor</th><th>Saldo</th></tr>'
+        response.text().then((txt)=>{
+            const json = JSON.parse(txt)
+            for(let i=0; i<json.data.length; i++){
+                const row = document.createElement('tr')
+                row.innerHTML = `<td>${json.data[i].date}</td><td>${json.data[i].description}</td><td>${json.data[i].value}</td><td>${json.data[i].balance}</td>`
+                tbl.appendChild(row)
+            }
+            document.querySelector('.extrato').appendChild(tbl)
+        })
+    
+        })
+    }
+
+
+    getExtrato()
+
+</script>
